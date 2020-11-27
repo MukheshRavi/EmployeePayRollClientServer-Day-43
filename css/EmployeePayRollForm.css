@@ -1,0 +1,187 @@
+body
+{
+    background-color: rgb(202, 198, 198);
+    margin : 0;
+}
+@media screen and (min-width:600px)
+{
+    .form-payroll
+    {
+        background-color: white;
+        width: 70%;
+        height: 100%;
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2vh;
+        border-radius: 15px;
+
+    }
+}
+@media screen and (max-width:600px)
+{
+    .form-payroll
+    {
+        background-color: white;
+        width: 80%;
+        height: 100%;
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border-radius: 8px;
+    }
+}
+.header
+{
+    display: flex;
+    flex: auto;
+    justify-content: flex-start;
+    margin-top: 2vh;
+    background-color: white;
+    box-shadow: 2px 2px rgb(216, 215, 215);
+    border: 1px solid rgb(51, 51, 33);
+    margin-bottom: 1vh;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 5px;
+}
+.header > img
+{
+    margin-left: 8%;
+    margin-right: 6px;
+    align-content: center;
+}
+.header-text
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.text-employee
+{
+    font-family: "Montserrat", sans-serif;
+    flex: auto;
+    color: chartreuse;
+    font-weight: bolder;
+    font-size: 2vw;
+}
+.text-payroll
+{
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    font-weight: bolder;
+    font-size: 2vw;
+}
+
+.form-content
+{
+    background-color: rgb(202, 198, 198);
+    display: flex;
+    flex: auto;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-content
+{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 10px;
+    margin-left: 5vw;
+    margin-right: 8vw;
+}
+
+.formHeader
+{
+    font-size: x-large;
+    font-weight: bolder;
+    text-shadow: ivory;
+}
+.Labels
+{
+    width:20%;
+    font-size: large;
+    font-weight: normal;
+
+}
+.text
+{
+    margin-left: 3vw;
+}
+.input
+{
+    display: flex;
+    flex : auto;
+    flex-flow: row wrap;
+    margin-left: 3vw;
+    line-height: 2.0;
+    padding: 0;
+    justify-content: flex-start;
+}
+.textName
+{
+    margin-left: 3vw;
+    flex : 5 0 0;
+    line-height: 2.0;
+    padding: 0;
+    justify-content: flex-start;
+}
+.errorText
+{
+    flex:auto;    
+}
+.MultipleLabels
+{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-right: 3vw;
+    align-items: center;
+}
+form select
+{
+    margin-right: 3vw;
+    line-height: 2.0;
+    padding: 8px; 
+    border: 2px solid #CCC;
+    border-radius: 6px; 
+    font: normal normal normal 15px Roboto;
+    background-color: transparent; 
+    text-align: center;
+}
+.button 
+{ 
+    font-size: 20px;
+    font-family: Roboto;
+    letter-spacing: box; 
+    color: #070707; 
+    opacity: 1;
+    background-color: transparent;
+    font-weight: 400;
+    padding: 7px 7px;
+    margin-right: 15px;
+    border-radius: 6px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.allButtons
+{
+    display: flex;
+    flex-flow: row wrap;
+    flex: auto;
+    justify-content: space-evenly;
+    margin-bottom: 2px;
+    padding: 10px;
+}
+error-output
+{
+    margin-left:10px;
+    font-size:12px;
+    font-style:italic;
+    color:red;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../assets/HeaderIcon.png" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="../css/EmployeePayRollHome.css" rel="stylesheet">
+    <title>Employee Payroll Form</title>
+</head>
+<body>
+    <header class="header">
+        <img src="../assets/HeaderIcon.png" alt="Form logo">
+        <div class="header-text">
+            <span class="text-employee">EMPLOYEE</span>
+            <span class="text-payroll">PAYROLL</span>
+        </div>
+    </header>
+    <header class="EmployeeDetails">
+        <h2 class="textEmployee">Employee Details<div class="emp-count">10</div></h2>
+        <div class="AddUser">
+            <img class="searchImage" src="../assets/search.png" alt="Search Employee">
+            <button type="button" class="addButton" onclick="location.href='../pages/EmployeePayRollForm.html'">
+            <img class="addUser" src="../assets/icons/add-24px.svg" alt="add">
+                Add User
+            </button>
+        </div>
+    </header>
+    <table class="employeeTable" id="empTable">
+    </table>
+    <script src="../js/EmployeePayRollHome.js"></script>
+    <script src="../js/site_properties.js"></script>
+    <script src="../js/Utility.js"></script>
+</html>
