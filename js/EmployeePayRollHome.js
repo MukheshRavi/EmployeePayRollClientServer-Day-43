@@ -1,11 +1,11 @@
 let employeeList = [];
 window.addEventListener('DOMContentLoaded', ()=>{
-    createEmployeeTable();
-
+  if (site_properties.use_local_storage.match("true")) {
+    getEmployeePayrollDataFromStorage();
+  } else getEmployeePayrollDataFromServer();
 });
 
 const createEmployeeTable = ()=>{
-    employeeList = JSON.parse(localStorage.getItem("NewEmployeePayrollList"));
    let innerHtml = "<tr><th></th><th>Name</th><th>Gender</th><th>Department</th><th>Salary</th><th>Start Date</th><th>Actions</th></tr>";
     for (const empPayrollData of employeeList) {
         innerHtml = `${innerHtml}
@@ -26,6 +26,30 @@ const createEmployeeTable = ()=>{
     }
     document.querySelector(".employeeTable").innerHTML = innerHtml;
 }
+const getEmployeePayrollDataFromStorage = () => {
+  /// Populating the global employee payroll list by using the local storage
+  employeeList = localStorage.getItem("NewEmployeePayrollList")
+    ? JSON.parse(localStorage.getItem("NewEmployeePayrollList"))
+    : [];
+  processEmployeePayrollDataResponse();
+};
+const getEmployeePayrollDataFromServer = () => {
+  makeServiceCall("GET", site_properties.server_url, true)
+    .then((responseText) => {
+      employeeList= JSON.parse(responseText);
+      /// Calling the process Employee Payroll Data response to dynamically set the value of employee count onto the home webpage
+      processEmployeePayrollDataResponse();
+    })
+    .catch((error) => {
+      console.log("GET Error Status: " + JSON.stringify(error));
+      employeeList = [];
+      processEmployeePayrollDataResponse();
+    });
+}
+const processEmployeePayrollDataResponse = () => {
+  document.querySelector(".emp-count").textContent = employeeList.length;
+  createEmployeeTable();
+};
 const getDeptHtml = (deptList) => {
     let deptHtml = '';
     for (const dept of deptList) {
