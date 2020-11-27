@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, 
+        initial-scale=1.0">
+  <title>Test Ajax Services and Promise</title>
+  <style>
+    .body { margin: auto; }
+    div {
+      border: 1px solid black;
+      background-color: lightblue;
+      padding: 50px;
+      width: 80%;
+      font-size: xx-large;
+      margin-top: 50px;
+    }
+  </style>
+    <script src="../js/httpservices.js"></script>
+  </head>
+  <body>
+    <h1>The Test Serices Result</h1>
+    <div id="get_services" ></div>
+    <div id="delete_services" ></div>
+    <div id="post_services" ></div>
+    <script>
+      const getElem = document.querySelector("#get_services");
+      const getURL = " http://localhost:3000/EmployeePayrollDB/1";
+      makeServiceCall("GET", getURL, false)
+        .then(responseText => {
+            getElem.textContent = "Get User Data: "+responseText;
+        })
+        .catch(error => {
+          getElem.textContent = "GET Error Status: "+error.status;
+        });
+
+      const deleteElem = document.querySelector("#delete_services");
+      const deleteURL = " http://localhost:3000/EmployeePayrollDB/2";
+      makeServiceCall("DELETE", deleteURL, false)
+        .then(responseText => {
+          deleteElem.textContent = "Delete Data: "+responseText;
+        })
+        .catch(error => {
+          deleteElem.textContent = "DELETE Error Status: "+ error.status;
+        });
+
+      const postElem = document.querySelector("#post_services");
+      const postURL = " http://localhost:3000/EmployeePayrollDB";
+      const emplData = {
+      "_name": "Mukhesh",
+      "_gender": "male",
+      "_department": [
+        "Finance"
+      ],
+      "_salary": "500000",
+      "_startDate": "29 Aug 2019",
+      "_note": "",
+      "_profilePic": "../assets/profile -2.png",
+      "id": 4
+    }
+      makeServiceCall("POST", postURL, false, emplData)
+        .then(responseText => {
+          postElem.innerHTML = `${"New User Data: "+ responseText}`;
+        })
+        .catch(error => {
+          postElem.textContent = "POST Error Status: "+ error.status;
+        });
+    </script>
+  </body>
+</html>
