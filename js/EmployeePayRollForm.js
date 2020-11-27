@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', (event) =>
         } 
         try 
         {
-            (new EmployeePayRoll()).name = name.value;
+            checkName(name.value);
             textError.textContent = "";
         }
         catch (e) 
@@ -41,7 +41,7 @@ const date = Array.from(document.querySelectorAll('[name = date]'));
             try
             {
                 let date = getInputElementValue('#year')+","+getInputElementValue('#month')+","+getInputElementValue('#day');
-                (new EmployeePayRoll()).startDate = new Date(date);
+                checkDate(new Date(date));
                 error.textContent = ""
                 
             }
@@ -147,7 +147,7 @@ function CreateAndSaveLocalStorage(employee)
     employeePayrollList = JSON.parse(localStorage.getItem("NewEmployeePayrollList")); 
     if(employeePayrollList != undefined)
     {
-        let index =employeePayrollList.findIndex(emp => emp._id == employee._id);
+        let index =employeePayrollList.findIndex(emp => emp.id == employee.id);
         if(index != -1)
         employeePayrollList.splice(index,1,employee);
         else
