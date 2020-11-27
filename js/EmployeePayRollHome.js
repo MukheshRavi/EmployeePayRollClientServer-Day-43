@@ -17,9 +17,9 @@ const createEmployeeTable = ()=>{
             <td>${empPayrollData._salary}</td>
             <td>${empPayrollData._startDate}</td>
             <td>
-            <img id="${empPayrollData._id}" onclick="remove(this)" 
+            <img id="${empPayrollData.id}" onclick="remove(this)" 
                 src="../assets/icons/delete-black-18dp.svg" alt="delete">
-            <img id="${empPayrollData._id}" onclick="update(this)" 
+            <img id="${empPayrollData.id}" onclick="update(this)" 
                 src="../assets/icons/create-black-18dp.svg" alt="edit"></td>
         </tr>
     `;
@@ -35,7 +35,7 @@ const getDeptHtml = (deptList) => {
   }
   //Function to Remove an employee
   const remove = (param) =>{
-    let empPayrollData = employeeList.findIndex(emp => emp._id == param.id);
+    let empPayrollData = employeeList.findIndex(emp => emp.id == param.id);
     if(askDelete(empPayrollData._name))
     employeeList.splice(empPayrollData,1);
     else
@@ -48,7 +48,7 @@ let askDelete = (name) =>{
     return confirm("Do you want to continue with the deletion of employee!!"+name);
 }
 const update = (node) =>{
-  let employeePayrollData = employeeList.find(emp => emp._id == node.id);
+  let employeePayrollData = employeeList.find(emp => emp.id == node.id);
   if(employeePayrollData != undefined)
   {
       localStorage.setItem("editEmp",JSON.stringify(employeePayrollData));
