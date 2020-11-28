@@ -1,5 +1,7 @@
 //Validation of Name
 //Displaying choosen salary
+let isUpdate = false;
+let employeePayrollData={};
 const employeePayrollJson = localStorage.getItem('editEmp');
 employeePayrollObj = JSON.parse(employeePayrollJson);
 localStorage.removeItem("editEmp");
@@ -118,15 +120,19 @@ function save()
     {
         try
         {
-            let employee = createEmployeePayroll();
-            CreateAndSaveLocalStorage(employee);
+            if (site_properties.use_local_storage.match("false"))
+            createOrUpdateEmployeePayroll();
+            else{
+            createEmployeePayroll();
+            CreateAndSaveLocalStorage(employeePayrollData);
             if(isUpdate)
-                alert("Successfully Updated");
-            else
-            {
-                alert(employee.toString());
+        alert("Successfully Updated");
+    else
+    {
+        alert(employeePayrollData.toString());
+    }
+    window.location.replace(site_properties.home_page);
             }
-            window.location.replace(site_properties.home_page);
         }
         catch(e)
         {
@@ -140,6 +146,29 @@ function save()
     }
     return false;
 }
+//PUT and POST in json server
+const createOrUpdateEmployeePayroll = () => {
+    let postURL = site_properties.server_url;
+    let methodCall = "POST";
+    if (isUpdate) {
+      methodCall = "PUT";
+      postURL = postURL + employeePayrollObj.id.toString();
+    }
+    createEmployeePayroll();
+    makeServiceCall(methodCall, postURL, true,employeePayrollData)
+      .then((responseText) => {
+        if(isUpdate)
+        alert("Successfully Updated");
+    else
+    {
+        alert(employeePayrollData.toString());
+    }
+    window.location.replace(site_properties.home_page);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
 //Function to create local storage
 function CreateAndSaveLocalStorage(employee)
 {
@@ -163,18 +192,20 @@ function CreateAndSaveLocalStorage(employee)
 //retriving data from form
 const createEmployeePayroll=()=>
 { 
-    let employeePayrollData = new EmployeePayRoll();
+    if (site_properties.use_local_storage.match("true"))
+    {
     if(employeePayrollObj!=undefined)
-    {employeePayrollData.id=employeePayrollObj._id;}
+    {employeePayrollData.id=employeePayrollObj.id;}
     else
     {employeePayrollData.id = createNewEmployeeId();}
-    employeePayrollData.name = getInputElementValue('#Name');
-    employeePayrollData.profilePic = getSelectedValues('[name=profilePic]').pop();
-    employeePayrollData.gender = getSelectedValues('[name=gender]').pop(); 
-    employeePayrollData.department = getSelectedValues('[name=department]');
-    employeePayrollData.salary = getInputElementValue('#salary');
-    employeePayrollData.note = getInputElementValue('#notes');
-    employeePayrollData.startDate = new Date(getInputElementValue('#year'),getInputElementValue('#month'),getInputElementValue('#day'));
+    }
+    employeePayrollData._name = getInputElementValue('#Name');
+    employeePayrollData._profilePic = getSelectedValues('[name=profilePic]').pop();
+    employeePayrollData._gender = getSelectedValues('[name=gender]').pop(); 
+    employeePayrollData._department = getSelectedValues('[name=department]');
+    employeePayrollData._salary = getInputElementValue('#salary');
+    employeePayrollData._note = getInputElementValue('#notes');
+    employeePayrollData._startDate = new Date(getInputElementValue('#year'),getInputElementValue('#month'),getInputElementValue('#day'));
     return employeePayrollData; 
 }
 //Anonoymous methods to read the data from form
