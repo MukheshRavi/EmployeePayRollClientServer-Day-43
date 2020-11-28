@@ -36,18 +36,6 @@
       "_note": "",
       "_profilePic": "../assets/profile -2.png",
       "id": 4
-    },
-    {
-      "_name": "Ram",
-      "_profilePic": "../assets/profile -3.png",
-      "_gender": "male",
-      "_department": [
-        "Sales"
-      ],
-      "_salary": "400000",
-      "_note": "hvhjvkjbvjk",
-      "_startDate": "2020-11-24T18:30:00.000Z",
-      "id": 5
     }
   ]
 }
