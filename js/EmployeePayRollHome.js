@@ -58,18 +58,35 @@ const getDeptHtml = (deptList) => {
     return deptHtml;
   }
   //Function to Remove an employee
-  const remove = (param) =>{
-    let empPayrollData = employeeList.findIndex(emp => emp.id == param.id);
-    if(askDelete(empPayrollData._name))
-    employeeList.splice(empPayrollData,1);
-    else
-    return;
-    localStorage.setItem("NewEmployeePayrollList", JSON.stringify(employeeList));
-    createEmployeeTable();
+const remove = (node) =>{
+  // Remove from local storage
+  if(site_properties.use_local_storage.match("true"))
+  {
+      let empPayrollData = employeeList.findIndex(emp => emp.id == node.id);
+      if(askDelete())
+      employeeList.splice(empPayrollData,1);
+      else
+      return;
+      localStorage.setItem("NewEmployeePayrollList", JSON.stringify(employeeList));
+      window.location.replace(site_properties.home_page);
+  }
+  //or
+  // remove from json server
+  else
+  {
+      if(askDelete())
+      {
+        makeServiceCall("DELETE",site_properties.server_url+node.id.toString(),true)
+          .then(window.location.replace(site_properties.home_page))
+          .catch(err => {alert(err.statusText);window.location.reload();})
+      }
+      else
+      return;
+  }
 }
 
 let askDelete = (name) =>{
-    return confirm("Do you want to continue with the deletion of employee!!"+name);
+    return confirm("Do you want to continue with the deletion of employee!!");
 }
 const update = (node) =>{
   let employeePayrollData = employeeList.find(emp => emp.id == node.id);
